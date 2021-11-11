@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ShrubCrypt V1.1x</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="shrubcrypt.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>ShrubCrypt</h1>
+            </div>
+
+            <div class="controls">
+                <button onclick='swapIOButtonPress()'>Swap I/O</button>
+                <button onclick='swapKOButtonPress()'>Swap K/O</button>
+                <button onclick='encryptButtonPress()'>Encrypt</button>
+                <button onclick='decryptButtonPress()'>Decrypt</button>
+            </div>
+
+            <div class="body">
+                <h2>Plaintext/Ciphertext:</h2>
+                <textarea id="input_text" cols="50" rows="10" placeholder="Enter Input Here"></textarea>
+
+                <h2>Key:</h2>
+                <textarea id="input_key" cols="50" rows="10" placeholder="Enter Key Here"></textarea><p></p>
+                <button id="buttonRand" onclick='generateRandomKeyButtonPress()'>Generate Random Key</button>
+
+                <h2>Output:</h2>
+                <textarea readonly id="output_text" cols="50" rows="10"></textarea>
+
+                <p id="author">Created By: Archaversine</p>
+            </div>
+        </div>
+
+        <script src="main.js"></script>
+    </body>
+</html>
