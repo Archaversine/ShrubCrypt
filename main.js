@@ -41,7 +41,7 @@ function decryptButtonPress()
     var text = document.getElementById('input_text').value;
     var key = document.getElementById('input_key').value;
 
-    if (text == '' || key == '') { return ;}
+    if (text == '' || key == '') { return; }
 
     document.getElementById('output_text').value = shrubDecrypt(text, key);
 }
