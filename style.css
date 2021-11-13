@@ -30,6 +30,7 @@ body
 {
     width: 98.5%;
     margin: 5px;
+    padding-top: 5px;
     background-color: rgb(19, 19, 19);
     border-radius: 16px;
 }

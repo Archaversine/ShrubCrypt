@@ -1,4 +1,6 @@
 // Clear text values on load
+document.getElementById('input_text').value = '';
+document.getElementById('input_key').value = '';
 document.getElementById('output_text').value = '';
 
 // Swap input with output
