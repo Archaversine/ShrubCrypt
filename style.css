@@ -26,12 +26,20 @@ body
     padding: 5px;
 }
 
+.container .header
+{
+    width: 98.5%;
+    margin: 5px;
+    background-color: rgb(19, 19, 19);
+    border-radius: 16px;
+}
+
 .container h1
 {
     margin-top: 5px;
     margin-bottom: 20px;
     margin-left: 5px;
-    color: rgb(182, 182, 182);
+    color: rgb(209, 209, 209);
 }
 
 .container h2
@@ -41,9 +49,9 @@ body
     color: rgb(182, 182, 182);
 }
 
-.container .controls
+.container .button-controls
 {
-    width: 97%;
+    width: 100%;
     margin: 10px auto;
 }
 
@@ -56,6 +64,7 @@ body
     border-radius: 4px;
     outline: none;
     box-shadow: 2px 2px 5px #141414;
+    background-color: rgb(161, 161, 161);
 }
 
 .container #buttonRand
