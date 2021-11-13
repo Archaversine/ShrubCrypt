@@ -1,4 +1,3 @@
-
 // Clear text values on load
 document.getElementById('output_text').value = '';
 
@@ -32,7 +31,7 @@ function encryptButtonPress()
 
     if (text == '' || key == '') { return; }
 
-    document.getElementById('output_text').value = shrubEncrypt(text, key);
+    document.getElementById('output_text').value = shrubEncrypt(text, key, usesHexKey());
 }
 
 // Perform decryption calculation
@@ -43,7 +42,7 @@ function decryptButtonPress()
 
     if (text == '' || key == '') { return; }
 
-    document.getElementById('output_text').value = shrubDecrypt(text, key);
+    document.getElementById('output_text').value = shrubDecrypt(text, key, usesHexKey(), usesHexDecrypt());
 }
 
 // Generate a random key matching the length
@@ -51,4 +50,50 @@ function decryptButtonPress()
 function generateRandomKeyButtonPress()
 {
     alert("This feature is disabled for this version!");
+}
+
+function toggleHexKeyButtonPress()
+{
+    var btn = document.getElementById('toggle_hex_key');
+
+    if (btn.classList.contains('enabled'))
+    {
+        btn.classList.remove('enabled');
+        btn.classList.add('disabled');
+        btn.innerText = "Hex Key Off";
+    }
+    else
+    {
+        btn.classList.remove('disabled');
+        btn.classList.add('enabled');
+        btn.innerText = "Hex Key On";
+    }
+}
+
+function toggleHexDecryptButtonPress()
+{
+    var btn = document.getElementById('toggle_hex_decrypt');
+
+    if (btn.classList.contains('enabled')) 
+    {
+        btn.classList.remove('enabled');
+        btn.classList.add('disabled');
+        btn.innerText = "Hex Decrypt Off";
+    }
+    else 
+    {
+        btn.classList.remove('disabled');
+        btn.classList.add('enabled');
+        btn.innerText = "Hex Decrypt On";
+    }
+}
+
+function usesHexKey()
+{
+    return document.getElementById('toggle_hex_key').classList.contains('enabled');
+}
+
+function usesHexDecrypt()
+{
+    return document.getElementById('toggle_hex_decrypt').classList.contains('enabled');
 }

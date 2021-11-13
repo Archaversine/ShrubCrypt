@@ -8,7 +8,32 @@ function toHex(dec)
     return hx;
 }
 
-function shrubEncrypt(text, given_key)
+function toHexString(bytes)
+{
+    var output = '';
+
+    for (var i = 0; i < bytes.length; i++) 
+    {
+        output += toHex(bytes[i]);
+    }
+
+    return output;
+}
+
+function parseHexString(str)
+{
+    var temp = str.match(/.{1,2}/g);
+    var output_bytes = [];
+
+    for (var i = 0; i < temp.length; i++) 
+    {
+        output_bytes.push(parseInt(temp[i], 16));
+    }
+
+    return output_bytes;
+}
+
+function shrubEncrypt(text, given_key, isHexKey)
 {
     var text_bytes = []
     var key_bytes = []
@@ -27,7 +52,20 @@ function shrubEncrypt(text, given_key)
     for (var i = 0; i < text.length; i++)
     {
         text_bytes.push(text.charCodeAt(i));
-        key_bytes.push(key.charCodeAt(i));
+        //key_bytes.push(key.charCodeAt(i));
+    }
+
+    // Parse Key
+    if (isHexKey)
+    {
+        key_bytes = parseHexString(key);
+    }
+    else
+    {
+        for (var i = 0; i < text.length; i++) 
+        {
+            key_bytes.push(key.charCodeAt(i));
+        }
     }
 
     // Apply XOR
@@ -36,22 +74,15 @@ function shrubEncrypt(text, given_key)
         output_bytes.push(text_bytes[i] ^ key_bytes[i]);
     }
 
-    // Translate from ASCII to Hex
-    for (var i = 0; i < output_bytes.length; i++)
-    {
-        output += toHex(output_bytes[i]);
-    }
-
-    return output;
+    return toHexString(output_bytes);
 }
 
-function shrubDecrypt(text, given_key)
+function shrubDecrypt(text, given_key, isHexKey, hexDecrypt)
 {
-    var text_bytes = [];
+    var text_bytes = parseHexString(text);
     var key_bytes = []
     var output_bytes = [];
     
-    var temp = text.match(/.{1,2}/g);
     var output = '';
     var key = '';
 
@@ -61,22 +92,28 @@ function shrubDecrypt(text, given_key)
         key += given_key;
     }
 
-    // Parse hexadecimal bytes
-    for (var i = 0; i < temp.length; i++)
+    // Parse key
+    if (isHexKey)
     {
-        text_bytes.push(parseInt(temp[i], 16));
+        key_bytes = parseHexString(key);
     }
-
-    // Parse key bytes
-    for (var i = 0; i < key.length; i++)
+    else
     {
-        key_bytes.push(key.charCodeAt(i));
+        for (var i = 0; i < key.length; i++) 
+        {
+            key_bytes.push(key.charCodeAt(i));
+        }
     }
 
     // Apply XOR
     for (var i = 0; i < text_bytes.length; i++) 
     {
         output_bytes.push(text_bytes[i] ^ key_bytes[i]);
+    }
+
+    if (hexDecrypt)
+    {
+        return toHexString(output_bytes);
     }
 
     // Convert to ASCII
