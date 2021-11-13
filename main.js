@@ -34,6 +34,8 @@ function encryptButtonPress()
     if (text == '' || key == '') { return; }
 
     document.getElementById('output_text').value = shrubEncrypt(text, key, usesHexKey());
+
+    scrollToBottom();
 }
 
 // Perform decryption calculation
@@ -45,6 +47,8 @@ function decryptButtonPress()
     if (text == '' || key == '') { return; }
 
     document.getElementById('output_text').value = shrubDecrypt(text, key, usesHexKey(), usesHexDecrypt());
+
+    scrollToBottom();
 }
 
 // Generate a random key matching the length
@@ -99,3 +103,29 @@ function usesHexDecrypt()
 {
     return document.getElementById('toggle_hex_decrypt').classList.contains('enabled');
 }
+
+function scrollToBottom()
+{
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+}
+
+function autoFillKey()
+{
+    if (usesHexKey()) { return; }
+
+    var keybox = document.getElementById('input_key');
+    var inputbox = document.getElementById('input_text');
+
+    while (keybox.value.length < inputbox.value.length)
+    {
+        keybox.value += '.';
+    }
+}
+
+document.onkeydown = function(e)
+{
+    if (e.keyCode == '45')
+    {
+        autoFillKey();
+    }
+};
